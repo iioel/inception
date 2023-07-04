@@ -23,7 +23,7 @@ mariadb -u root -p${WP_DBADMINPASS} -e "CREATE DATABASE IF NOT EXISTS ${WP_DBNAM
 echo " OK"
 
 echo -n "Creating ${WP_DBUSER} database user..."
-mariadb -u root -p${WP_DBADMINPASS} -e "CREATE USER IF NOT EXISTS '${WP_DBUSER}'@'%' IDENTIFIED BY '${WP_DBPASS}'; GRANT ALL PRIVILEGES ON db_wordpress.* TO '${WP_DBUSER}'@'%'; FLUSH PRIVILEGES;"
+mariadb -u root -p${WP_DBADMINPASS} -e "CREATE USER IF NOT EXISTS '${WP_DBUSER}'@'%' IDENTIFIED BY '${WP_DBPASS}'; GRANT ALL PRIVILEGES ON '${WP_DBNAME}'.* TO '${WP_DBUSER}'@'%'; FLUSH PRIVILEGES;"
 echo " OK"
 
 mariadb-admin shutdown
