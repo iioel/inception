@@ -25,6 +25,9 @@ services:
     image: inception/nginx:v1
     container_name: nginx
     restart: on-failure
+    depends_on:
+      wordpress:
+        condition: service_healthy
     cap_drop:
       - ALL
     cap_add:
@@ -52,10 +55,12 @@ services:
     container_name: wordpress
     restart: on-failure
     depends_on:
-      - mariadb
-      - nginx
+      mariadb:
+        condition: service_healthy
     cap_drop:
       - ALL
+    cap_add:
+      - NET_ADMIN
     env_file: .env
     healthcheck:
       test: SCRIPT_NAME=/status SCRIPT_FILENAME=/status REQUEST_METHOD=GET cgi-fcgi -bind -connect 127.0.0.1:9000 || exit 1

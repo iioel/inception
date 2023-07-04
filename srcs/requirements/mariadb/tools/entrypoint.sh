@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Installing mariadb database..."
+mariadb-install-db --datadir=/var/lib/mysql --user=mysql
+
 if [[ ! -v WP_DBADMINPASS ]] || [[ ! -v WP_DBUSER ]] || [[ ! -v WP_DBPASS ]] || [[ ! -v WP_DBNAME ]]
 then
 	echo "ERROR: Env vars WP_DBADMINPASS, WP_DBUSER, WP_DBPASS or WP_DBNAME undefined."
