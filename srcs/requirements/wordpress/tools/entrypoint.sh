@@ -19,7 +19,7 @@ then
 	echo "Exiting..."
 	exit
 fi
-wp config create --dbname=${WP_DBNAME} --dbuser=${WP_DBUSER} --dbpass=${WP_DBPASS} \
+wp config create --dbname="${WP_DBNAME}" --dbuser="${WP_DBUSER}" --dbpass="${WP_DBPASS}" \
 	--dbhost=mariadb --locale=en_US --skip-check
 
 echo "Install wordpress..."
@@ -30,8 +30,8 @@ then
 	echo "Exiting..."
 	exit
 fi
-wp core install --url=${WP_URL} --title=${WP_TITLE} --admin_user=${WP_ADMINUSER} \
-	--admin_password=${WP_ADMINPASS} --admin_email=${WP_ADMINEMAIL} --locale=en_US --skip-email
+wp core install --url="${WP_URL}" --title="${WP_TITLE}" --admin_user="${WP_ADMINUSER}" \
+	--admin_password="${WP_ADMINPASS}" --admin_email="${WP_ADMINEMAIL}" --locale=en_US --skip-email
 
 echo "Starting php-fpm..."
 exec /usr/sbin/php-fpm8.2 -F -O
