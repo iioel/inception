@@ -4,7 +4,6 @@ echo "Setting up php-fpm config..."
 sed -i "s|^;ping.path = /ping$|ping.path = /ping|" /etc/php/8.2/fpm/pool.d/www.conf
 sed -i "s|^;ping.response = pong$|ping.response = pong|" /etc/php/8.2/fpm/pool.d/www.conf
 sed -i "s|^;pm.status_path = /status$|pm.status_path = /status|" /etc/php/8.2/fpm/pool.d/www.conf
-#sed -i "s|^;pm.status_listen = 127.0.0.1:9001$|pm.status_listen = 127.0.0.1:9001|" /etc/php/8.2/fpm/pool.d/www.conf
 sed -i "s|^;cgi.fix_pathinfo=1$|cgi.fix_pathinfo = 0|" /etc/php/8.2/fpm/php.ini
 
 cd /var/www/wordpress
