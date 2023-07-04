@@ -73,18 +73,14 @@ networks:
 
 volumes:
   database-data:
-    #driver: local
-    #driver_opts:
-    #  type: 'none'
-    #  o: 'bind'
-    #  #device: '/home/ycornamu/data/database-data'
-    #  #device: '/home/yoel/data/database-data'
-    #  device: '/Users/ycornamu/sgoinfre/ycornamu/inception/database-data'
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/ycornamu/data/database-data'
   wordpress-data:
-    #driver: local
-    #driver_opts:
-    #  type: 'none'
-    #  o: 'bind'
-    #  #device: '/home/ycornamu/data/wordpress-data'
-    #  #device: '/home/yoel/data/wordpress-data'
-    #  device: '/Users/ycornamu/sgoinfre/ycornamu/inception/wordpress-data'
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/ycornamu/data/wordpress-data'
