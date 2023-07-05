@@ -11,14 +11,14 @@ echo "Downloading latest wordpress release..."
 wp core download
 
 echo "Configure wordpress..."
-if [[ ! -v WP_DBUSER ]] || [[ ! -v WP_DBPASS ]] || [[ ! -v WP_DBNAME ]]
+if [[ ! -v DB_USER ]] || [[ ! -v DB_PASS ]] || [[ ! -v DB_NAME ]]
 then
 	echo "ERROR: Env vars WP_DBUSER, WP_DBPASS or WP_DBNAME undefined."
 	echo "       Please make sure that they are defined !"
 	echo "Exiting..."
 	exit
 fi
-wp config create --dbname="${WP_DBNAME}" --dbuser="${WP_DBUSER}" --dbpass="${WP_DBPASS}" \
+wp config create --dbname="${DB_NAME}" --dbuser="${DB_USER}" --dbpass="${DB_PASS}" \
 	--dbhost=mariadb --locale=en_US --skip-check
 
 echo "Install wordpress..."
@@ -31,6 +31,16 @@ then
 fi
 wp core install --url="${WP_URL}" --title="${WP_TITLE}" --admin_user="${WP_ADMINUSER}" \
 	--admin_password="${WP_ADMINPASS}" --admin_email="${WP_ADMINEMAIL}" --locale=en_US --skip-email
+
+echo "Creating user..."
+if [[ ! -v WP_USER ]] || [[ ! -v WP_USERPASS ]] || [[ ! -v WP_USERMAIL ]]
+then
+	echo "ERROR: Env vars WP_USER, WP_USERPASS or WP_USERMAIL undefined."
+	echo "       Please make sure that they are defined !"
+	echo "Exiting..."
+	exit
+fi
+wp user create "${WP_USER}" "${WP_USERMAIL}" --user_pass="${WP_USERPASS}" --role=author
 
 echo "Starting php-fpm..."
 exec /usr/sbin/php-fpm8.2 -F -O
